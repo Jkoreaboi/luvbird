@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { margin: 0; background: #F7F5EE; color: #24464A; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 2px solid #B76850; outline-offset: 3px; }
+::selection { background: #B76850; color: #FFFEFA; }
+.eyebrow { color: #B76850; font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.airmail-edge { background: repeating-linear-gradient(110deg, #B76850 0 22px, #F7F5EE 22px 38px, #6A8B93 38px 60px, #F7F5EE 60px 76px); }
+.stamp-edge { clip-path: polygon(0 0, 12% 0, 12% 4%, 24% 4%, 24% 0, 36% 0, 36% 4%, 48% 4%, 48% 0, 60% 0, 60% 4%, 72% 4%, 72% 0, 84% 0, 84% 4%, 100% 4%, 100% 100%, 0 100%); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
