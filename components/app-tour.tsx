@@ -81,7 +81,7 @@ export function AppTour() {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => choose(item.id)}
-                    className={`grid w-full grid-cols-[auto_1fr] gap-x-4 border-b border-ink/15 py-6 text-left sm:gap-x-6 ${selected ? "bg-envelope/80" : ""}`}
+                    className={`grid w-full grid-cols-[auto_1fr] gap-x-4 border-b border-ink/15 py-6 pl-4 text-left sm:gap-x-6 ${selected ? "bg-sky/50 shadow-[inset_3px_0_0_#B76850]" : "hover:bg-paper"}`}
                   >
                     <span className={`pt-1 text-xs font-bold tracking-[.18em] ${selected ? "text-coral" : "text-ink/40"}`}>
                       0{index + 1}
@@ -97,7 +97,7 @@ export function AppTour() {
             </div>
           </div>
           <div ref={frame} className="order-1 lg:sticky lg:top-28 lg:order-2">
-            <PhoneFrame src={step.src} alt={step.alt} priority />
+            <PhoneFrame src={step.src} alt={step.alt} priority className="mx-auto" />
             <p className="mt-4 text-center text-xs font-semibold uppercase tracking-[.18em] text-ink/45">{step.label}</p>
           </div>
         </div>

@@ -10,7 +10,7 @@ type PhoneFrameProps = {
 
 export function PhoneFrame({ src, alt, priority = false, className }: PhoneFrameProps) {
   return (
-    <div className={cn("mx-auto w-[232px] sm:w-[268px]", className)}>
+    <div className={cn("w-[232px] sm:w-[268px]", className)}>
       <div className="rounded-[2.4rem] bg-ink p-[9px] shadow-letter">
         <div className="overflow-hidden rounded-[1.95rem] bg-paper">
           <Image

@@ -30,15 +30,15 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[340px] pt-4">
-          <div className="absolute inset-x-6 top-8 -z-10 h-[92%] -rotate-3 border border-ink/10 bg-sky/70" aria-hidden="true" />
+        <div className="relative mx-auto w-full max-w-[440px] pt-2 lg:mx-0 lg:ml-auto">
+          <div className="absolute left-14 right-0 top-8 -z-10 h-[90%] -rotate-2 border border-ink/10 bg-sky/70" aria-hidden="true" />
           <PhoneFrame
             src="/screens/in-flight.png"
             alt="DearBird mailbox on a phone, with a letter from Seoul that still has 24 hours left"
             priority
-            className="w-[240px] sm:w-[280px]"
+            className="relative z-10 ml-auto w-[228px] sm:w-[270px]"
           />
-          <ScrollStamp className="absolute -left-2 bottom-16 sm:-left-8" />
+          <ScrollStamp className="absolute left-0 top-14 z-20 origin-top-left scale-90 sm:left-1 sm:top-16 sm:scale-100" />
         </div>
       </div>
     </section>
