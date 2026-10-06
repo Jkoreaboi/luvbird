@@ -53,14 +53,14 @@ The landing page (`app/page.tsx`) is composed of small section components in `co
 | Section | What it does |
 | --- | --- |
 | Navbar | Sticky header with anchor links and a mobile hamburger menu (`aria-expanded`, `aria-controls`). |
-| Hero | Headline, primary CTA, and a real in-app screenshot of a letter in transit. A "24h" stamp moves subtly on scroll. |
-| Problem | Frames the problem: instant messages, read receipts, endless feeds, disposable conversations. |
-| Features | Four product principles: 24-hour journey, no read receipts, city-level profiles, photos + letters. |
-| How it works | Three moments: Find, Write, Wait. |
-| Product preview | Three real DearBird app screens: Discover, Write, Receive. |
-| Physical letter vision | Clearly labeled as "A future chapter": bringing letters into a real mailbox one day. |
-| Final CTA | "Start a letter" button that tells the visitor DearBird is preparing for launch. It does not collect data. |
-| Footer | Brand mark and About link. Privacy, Terms, and Contact are placeholders and are not linked yet. |
+| Hero | App-listing header, store buttons, and the real mailbox screen inside a phone frame. A "24h" stamp moves subtly on scroll. |
+| Problem | Frames why a slow letter app exists: instant messages, read receipts, endless feeds, disposable conversations. |
+| Inside the app | Switches among four real screens: pen pals, write, mailbox, open letter. Lists the four places in the app. |
+| How it works | Three steps in the app: Find, Write, Wait. |
+| The rules | Four limits that stay at launch: 24 hours, no read receipts, city-level location, one letter to one person. |
+| Physical letter vision | Clearly labeled as "A future chapter": paper mail is not part of the app launch. |
+| Final CTA | App Store and Google Play buttons that say the app is coming soon. They do not collect data or open a store listing. |
+| Footer | Brand mark and section links. Privacy, Terms, and Contact are placeholders and are not linked yet. |
 
 Implementation details:
 
@@ -86,10 +86,10 @@ How a visitor moves through the landing page:
 
 ```mermaid
 flowchart TD
-    H[Hero] -->|See how it works| W[How it works]
-    H -->|Start your first letter| CTA[Final CTA]
-    P[Problem] --> F[Features] --> W --> PV[Product preview<br/>real app screens] --> V[Physical letter vision] --> CTA
-    CTA --> S[Status message:<br/>DearBird is preparing for launch]
+    H[Hero] -->|See the app| A[Inside the app]
+    H -->|Get the app| CTA[Final CTA]
+    P[Problem] --> A --> W[How it works] --> R[The rules] --> V[Physical letter vision] --> CTA
+    CTA --> S[Status message:<br/>stores open at launch]
 ```
 
 ## Tech Stack

@@ -1,9 +1,9 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
-import { Features } from "@/components/features";
+import { AppTour } from "@/components/app-tour";
 import { HowItWorks } from "@/components/how-it-works";
-import { ProductPreview } from "@/components/product-preview";
+import { Features } from "@/components/features";
 import { PhysicalLetter } from "@/components/physical-letter";
 import { FinalCta } from "@/components/final-cta";
 import { Footer } from "@/components/footer";
@@ -14,9 +14,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Problem />
-      <Features />
+      <AppTour />
       <HowItWorks />
-      <ProductPreview />
+      <Features />
       <PhysicalLetter />
       <FinalCta />
       <Footer />

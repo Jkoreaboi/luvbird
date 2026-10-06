@@ -18,8 +18,8 @@ const config: Config = {
         letter: "0 20px 60px rgba(36,70,74,.12)",
       },
       fontFamily: {
-        sans: ["Arial", "Helvetica", "sans-serif"],
-        serif: ["Georgia", "Times New Roman", "serif"],
+        sans: ["var(--font-sans)", "Arial", "Helvetica", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
       },
       keyframes: {
         float: {

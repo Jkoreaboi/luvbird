@@ -1,20 +1,19 @@
-"use client";
-
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { StoreButtons } from "@/components/store-buttons";
 
 export function FinalCta() {
-  const [sent, setSent] = useState(false);
   return (
-    <section id="cta" className="bg-coral px-5 py-24 text-paper sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="text-sm uppercase tracking-[.26em] text-paper/70">DearBird by Luvbird</p>
-        <h2 className="mt-5 font-serif text-5xl leading-[1.05] sm:text-6xl">Someone, somewhere,<br />might be writing to you.</h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-paper/80">No followers. No likes. Just people and their stories.</p>
-        <div className="mt-9">
-          <Button size="lg" className="bg-paper text-ink hover:bg-paper/90" onClick={() => setSent(true)}>{sent ? "Coming soon" : "Start a letter"}</Button>
-        </div>
-        {sent && <p className="mt-4 text-sm text-paper/80" role="status">DearBird is preparing for launch. Explore the real app screens above while we get ready.</p>}
+    <section id="cta" className="bg-coral px-5 py-20 text-paper sm:py-28 lg:px-10">
+      <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+        <Image src="/brand-mark.svg" alt="" width={84} height={84} className="h-[84px] w-[84px] rounded-[26px] bg-paper p-2" />
+        <p className="mt-6 text-xs font-bold uppercase tracking-[.22em] text-paper/75">DearBird by Luvbird</p>
+        <h2 className="mt-4 font-serif text-5xl leading-[1.05] sm:text-6xl">
+          Someone, somewhere, might be writing to you.
+        </h2>
+        <p className="mt-5 max-w-md text-lg leading-8 text-paper/85">
+          The app is preparing for the App Store and Google Play. No followers. No likes. Just one letter at a time.
+        </p>
+        <StoreButtons tone="paper" className="mt-8" />
       </div>
     </section>
   );
