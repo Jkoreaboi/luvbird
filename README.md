@@ -56,7 +56,7 @@ The landing page (`app/page.tsx`) is composed of small section components in `co
 | Hero | App-listing header, store buttons, and the real mailbox screen inside a phone frame. A "24h" stamp moves subtly on scroll. |
 | Problem | Frames why a slow letter app exists: instant messages, read receipts, endless feeds, disposable conversations. |
 | Inside the app | Switches among four real screens: pen pals, write, mailbox, open letter. Lists the four places in the app. |
-| How it works | Three steps in the app: Find, Write, Wait. |
+| How it works | Four moments, in order: Find, Write, Wait, Reply. |
 | The rules | Four limits that stay at launch: 24 hours, no read receipts, city-level location, one letter to one person. |
 | Physical letter vision | Clearly labeled as "A future chapter": paper mail is not part of the app launch. |
 | Final CTA | App Store and Google Play buttons that say the app is coming soon. They do not collect data or open a store listing. |
@@ -75,8 +75,8 @@ The product flow that the landing page communicates:
 
 ```mermaid
 flowchart LR
-    A[Find a pen pal<br/>by country, language, interests] --> B[Write a letter<br/>with a photo]
-    B --> C[Letter in transit<br/>24 hours]
+    A[Find someone<br/>country, language, interests, purpose] --> B[Write a letter<br/>with a photo]
+    B --> C[Letter in transit<br/>about 24 hours]
     C --> D[Letter arrives<br/>no read receipt]
     D --> E[Reply when ready]
     E --> C
@@ -130,7 +130,7 @@ flowchart TD
 
 ## Current Status
 
-- The landing page is complete. `npm run typecheck` and `npm run build` pass, and every route is prerendered as static content.
+- Quality check passed. `npm run typecheck` and `npm run build` pass, and every route is prerendered as static content. The page has one `h1`, no horizontal overflow on desktop or a 390px screen, and the letter moves in order: Find, Write, Wait, Reply.
 - The CTA is a launch placeholder. There is no signup, waitlist, or backend in this repository.
 - Footer Privacy, Terms, and Contact entries are placeholders.
 - Physical mail is a future vision, not a shipped feature.

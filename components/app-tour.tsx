@@ -46,9 +46,9 @@ const places = [
 ];
 
 export function AppTour() {
-  const [active, setActive] = useState<(typeof steps)[number]["id"]>("wait");
+  const [active, setActive] = useState<(typeof steps)[number]["id"]>("pals");
   const frame = useRef<HTMLDivElement>(null);
-  const step = steps.find((item) => item.id === active) ?? steps[2];
+  const step = steps.find((item) => item.id === active) ?? steps[0];
 
   const choose = (id: (typeof steps)[number]["id"]) => {
     setActive(id);
@@ -66,7 +66,7 @@ export function AppTour() {
             The same four moments you will use.
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-8 text-ink/70">
-            These are real DearBird screens. Tap a step and the phone follows.
+            These are real DearBird screens, in the order a letter moves. Choose a step and the phone follows.
           </p>
         </div>
 
