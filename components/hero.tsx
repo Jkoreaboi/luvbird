@@ -14,7 +14,7 @@ export function Hero() {
             <Image src="/brand-mark.svg" alt="" width={72} height={72} className="h-[72px] w-[72px] rounded-[22px] border border-ink/10 bg-envelope p-1.5" priority />
             <div>
               <p className="font-serif text-2xl leading-none">DearBird</p>
-              <p className="mt-1 text-sm text-ink/55">by Luvbird · Letters</p>
+              <p className="mt-1 text-sm text-ink/55">by Luvbird</p>
             </div>
           </div>
           <p className="eyebrow mt-8">Your little post office</p>
@@ -22,7 +22,7 @@ export function Hero() {
             A letter, written for <span className="italic text-coral">you.</span>
           </h1>
           <p className="mt-6 max-w-md text-lg leading-8 text-ink/75">
-            DearBird is the Luvbird app for slow friendship. Find someone abroad, write about your day, and wait 24 hours for their story to arrive.
+            DearBird is Luvbird&apos;s first product: a letter for one person far away. Find them by country, language, interests, and what you hope to share. Then wait 24 hours for their day to arrive.
           </p>
           <StoreButtons className="mt-8" />
           <a href="#app" className="mt-8 inline-flex min-h-11 items-center gap-2 border-b border-ink/30 text-sm font-semibold hover:border-coral hover:text-coral">

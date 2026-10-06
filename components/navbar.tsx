@@ -20,7 +20,7 @@ export function Navbar() {
         <a href="#top" className="flex items-center gap-2" aria-label="DearBird, back to top" onClick={() => setOpen(false)}>
           <Image src="/brand-mark.svg" alt="" width={36} height={36} priority />
           <span className="font-serif text-xl font-bold tracking-tight">DearBird</span>
-          <span className="hidden border-l border-ink/20 pl-2 text-[10px] font-semibold uppercase tracking-[.16em] text-ink/50 sm:inline">App by Luvbird</span>
+          <span className="hidden border-l border-ink/20 pl-2 text-[10px] font-semibold uppercase tracking-[.16em] text-ink/50 sm:inline">by Luvbird</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm font-medium md:flex" aria-label="Primary navigation">
           {links.map((link) => (

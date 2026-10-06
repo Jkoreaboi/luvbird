@@ -19,7 +19,7 @@
 
 ## Overview
 
-DearBird is Luvbird's global pen pal product. People find someone abroad, write a letter with a photo, and wait while the letter travels for 24 hours before it arrives.
+Luvbird is the company. DearBird is its first product: a global letter, not a messenger. People find someone by country, language, interests, and why they want to write, then send a photo and a piece of their day. The letter travels for 24 hours, and the other person replies when they are ready.
 
 This repository contains the **DearBird marketing landing page**. It explains the product, shows real screens from the DearBird app, and separates what the product does today from its future physical-mail vision. It does not contain the app's source code, and it does not create accounts or send letters.
 

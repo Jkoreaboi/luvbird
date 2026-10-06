@@ -1,7 +1,7 @@
 const steps = [
-  { n: "01", title: "Find", body: "Choose a pen pal by country, language, and what you both care about." },
-  { n: "02", title: "Write", body: "Send a photo and a few lines meant for that one person." },
-  { n: "03", title: "Wait", body: "The letter travels for 24 hours. Then it is theirs to open." },
+  { n: "01", title: "Find", body: "Choose someone by country, language, interests, and the exchange you want." },
+  { n: "02", title: "Write", body: "Send a photo and a piece of your day, meant for that one person." },
+  { n: "03", title: "Wait", body: "The letter travels for 24 hours. They reply when they are ready." },
 ];
 
 export function HowItWorks() {

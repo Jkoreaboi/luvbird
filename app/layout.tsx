@@ -14,7 +14,7 @@ const serif = Fraunces({
   display: "swap",
 });
 
-const description = "DearBird is the Luvbird app for slow letters. Find someone abroad, write about your day, and wait 24 hours.";
+const description = "DearBird by Luvbird is a letter for one person far away. Find them, write about your day, and wait 24 hours.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),

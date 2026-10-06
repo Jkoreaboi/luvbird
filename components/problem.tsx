@@ -10,7 +10,7 @@ export function Problem() {
         </div>
         <div>
           <p className="text-lg leading-8 text-paper/75">
-            Chat made everything instant. DearBird keeps the wait, on purpose, so a letter from far away still feels like one.
+            Fast chat asks for an answer at once. DearBird is a letter. The day it spends traveling brings back the feeling of waiting for someone.
           </p>
           <p className="mt-6 text-xs font-semibold uppercase tracking-[.16em] text-paper/50">
             Instant messages · Read receipts · Endless feeds · Disposable conversations
