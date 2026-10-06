@@ -1,56 +1,171 @@
-# DearBird by Luvbird
+<p align="center">
+  <img src="assets/luvbird-mark.png" alt="Luvbird bird mark" width="120" />
+</p>
 
-DearBird is a global pen pal experience that brings back the anticipation of sending a letter and waiting for a reply. The landing page introduces its 24-hour letter journey, city-level profiles, photo letters, and slower approach to connection. The product screens in `public/screens/` come from the existing DearBird app.
+<p align="center">
+  <img src="assets/luvbird-logo.png" alt="Luvbird wordmark" width="360" />
+</p>
 
-## Stack
+<p align="center">
+  <strong>DearBird by Luvbird</strong>: a global pen pal product that brings back the feeling of waiting for a letter.
+</p>
 
-Next.js App Router, TypeScript, Tailwind CSS, and a reusable shadcn/ui-style Button built with Radix Slot and class-variance-authority.
+<p align="center">
+  <a href="https://www.luvbird.app/">luvbird.app</a> ·
+  Next.js 15 · React 19 · TypeScript · Tailwind CSS
+</p>
 
-## Features and interactions
+---
 
-- Responsive editorial landing page: Hero, Problem, Features, How it works, Product Preview, Physical Letter Vision, Final CTA, and Footer.
-- Smooth anchor scrolling for navigation and CTAs; mobile hamburger navigation.
-- Subtle scroll motion on the hero postage stamp, disabled when reduced motion is preferred.
-- Honest CTA feedback: the product is preparing for launch. The landing page does not create an account or send a letter.
-- Semantic sections, image alt text, page metadata, and a generated OpenGraph image.
+## Overview
+
+DearBird is Luvbird's global pen pal product. People find someone abroad, write a letter with a photo, and wait while the letter travels for 24 hours before it arrives.
+
+This repository contains the **DearBird marketing landing page**. It explains the product, shows real screens from the DearBird app, and separates what the product does today from its future physical-mail vision. It does not contain the app's source code, and it does not create accounts or send letters.
+
+- **Live product site:** [https://www.luvbird.app/](https://www.luvbird.app/)
+- **This repository:** the DearBird landing page (Next.js, static build)
+
+![DearBird landing page, desktop hero](assets/screenshots/landing-desktop.png)
+
+## Problem
+
+Messaging became instant. Read receipts, endless feeds, and disposable conversations make communication efficient, but they also make it shallow. The small anticipation of opening a letter from far away has almost disappeared.
+
+People aged 18–35 who want international friends, language exchange, or cultural discovery mostly have two options: fast chat apps or social feeds built around followers and likes. Neither encourages slow, considered conversation with one person.
+
+## Solution
+
+DearBird treats waiting as part of the experience rather than a delay to remove.
+
+- Each letter takes **24 hours** to arrive.
+- There are **no read receipts**, so nobody feels pressure to reply instantly.
+- Profiles show the **city, not the precise location**.
+- A letter can carry **a photo and words meant for one person**.
+- There are no followers and no likes. The product centers on people and their stories, not engagement.
+
+The landing page's job is to communicate this philosophy clearly and honestly to first-time visitors.
+
+## Core Features
+
+The landing page (`app/page.tsx`) is composed of small section components in `components/`.
+
+| Section | What it does |
+| --- | --- |
+| Navbar | Sticky header with anchor links and a mobile hamburger menu (`aria-expanded`, `aria-controls`). |
+| Hero | Headline, primary CTA, and a real in-app screenshot of a letter in transit. A "24h" stamp moves subtly on scroll. |
+| Problem | Frames the problem: instant messages, read receipts, endless feeds, disposable conversations. |
+| Features | Four product principles: 24-hour journey, no read receipts, city-level profiles, photos + letters. |
+| How it works | Three moments: Find, Write, Wait. |
+| Product preview | Three real DearBird app screens: Discover, Write, Receive. |
+| Physical letter vision | Clearly labeled as "A future chapter": bringing letters into a real mailbox one day. |
+| Final CTA | "Start a letter" button that tells the visitor DearBird is preparing for launch. It does not collect data. |
+| Footer | Brand mark and About link. Privacy, Terms, and Contact are placeholders and are not linked yet. |
+
+Implementation details:
+
+- Smooth anchor scrolling with a scroll offset for the sticky header. Smooth scrolling and the stamp motion are both disabled when the user prefers reduced motion.
+- Semantic sections, descriptive image alt text, visible focus states.
+- Page metadata and an OpenGraph image generated at build time (`app/opengraph-image.tsx`).
+- Fully static output: no backend, no database, no environment secrets.
+
+## User Flow
+
+The product flow that the landing page communicates:
+
+```mermaid
+flowchart LR
+    A[Find a pen pal<br/>by country, language, interests] --> B[Write a letter<br/>with a photo]
+    B --> C[Letter in transit<br/>24 hours]
+    C --> D[Letter arrives<br/>no read receipt]
+    D --> E[Reply when ready]
+    E --> C
+```
+
+How a visitor moves through the landing page:
+
+```mermaid
+flowchart TD
+    H[Hero] -->|See how it works| W[How it works]
+    H -->|Start your first letter| CTA[Final CTA]
+    P[Problem] --> F[Features] --> W --> PV[Product preview<br/>real app screens] --> V[Physical letter vision] --> CTA
+    CTA --> S[Status message:<br/>DearBird is preparing for launch]
+```
+
+## Tech Stack
+
+| Area | Choice |
+| --- | --- |
+| Framework | Next.js 15 (App Router), React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS 3, custom airmail tokens (paper, ink, coral, sky, envelope) |
+| UI primitive | shadcn/ui-style `Button` (Radix Slot + class-variance-authority) |
+| Icons | lucide-react |
+| Images | `next/image` with real app screenshots in `public/screens/` |
+
+## Product Decisions
+
+- **Waiting is the feature.** The 24-hour delay is the core value, so it appears in the hero, a dedicated stamp, the features list, and the "Wait" step.
+- **No read receipts, city-level location only.** These choices reduce reply pressure and protect privacy, and the page states them explicitly.
+- **Honest CTA.** The CTA never implies signup, letter delivery, or physical mail. Clicking it shows a "preparing for launch" message instead of a fake form.
+- **Current features vs. vision.** Physical mail is labeled as a future chapter so visitors don't mistake it for a shipped feature.
+- **Real screens over mockups.** The product preview uses actual DearBird app screenshots rather than illustrated placeholders.
+- **Design direction.** Vintage airmail motifs (envelopes, stamps, postmarks) with a modern editorial layout. The design deliberately avoids the generic AI-SaaS look: no heavy gradients, no glassmorphism, no dashboard layout.
+- **Accessibility as a default.** Reduced-motion support, keyboard-visible focus, labeled navigation, and an accessible mobile menu.
+
+## My Role
+
+**Founder / Product Lead**
+
+- Product planning: defined DearBird's concept, target audience, and product philosophy.
+- UX: structured the landing narrative from problem, to principles, to flow, to real screens, to vision, to CTA.
+- MVP scope: kept the page to what is true today and moved physical mail into a clearly marked vision section.
+- AI-assisted development: built the page with an AI coding assistant, guided by a written product brief ([`CLAUDE.md`](CLAUDE.md)) that sets product rules, design principles, and delivery checks.
+- Deployment: prepared the project for Vercel deployment (`NEXT_PUBLIC_SITE_URL` for canonical and OpenGraph URLs).
+
+## Collaboration
+
+- The landing page was implemented through AI-assisted development. [`CLAUDE.md`](CLAUDE.md) is the working brief that defines the service, audience, design principles, and non-negotiable rules (for example, "Do not imply account signup, letter delivery, or physical mail works from this landing page").
+- The product screens in `public/screens/` come from the existing DearBird app. This repository does not include the app's source code.
+
+## Current Status
+
+- The landing page is complete. `npm run typecheck` and `npm run build` pass, and every route is prerendered as static content.
+- The CTA is a launch placeholder. There is no signup, waitlist, or backend in this repository.
+- Footer Privacy, Terms, and Contact entries are placeholders.
+- Physical mail is a future vision, not a shipped feature.
+- [luvbird.app](https://www.luvbird.app/) is Luvbird's live product site. This landing page is a separate codebase and is not the site served at that domain.
+
+## Screenshots
+
+**Landing page**
+
+| Desktop | Mobile |
+| --- | --- |
+| <img src="assets/screenshots/landing-desktop.png" alt="DearBird landing page hero on desktop" width="560" /> | <img src="assets/screenshots/landing-mobile.png" alt="DearBird landing page hero on mobile" width="240" /> |
+
+**DearBird app screens used on the page**
+
+| Discover | Write | In transit | Receive |
+| --- | --- | --- | --- |
+| <img src="public/screens/penpals.png" alt="Pen pal discovery screen" width="200" /> | <img src="public/screens/compose.png" alt="Letter writing screen" width="200" /> | <img src="public/screens/in-flight.png" alt="Letter on its 24-hour journey" width="200" /> | <img src="public/screens/open-letter.png" alt="Opened letter screen" width="200" /> |
 
 ## Run locally
 
-Use Node.js 20 or newer.
+Requires Node.js 20 or newer.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Check production output with:
+Open [http://localhost:3000](http://localhost:3000).
+
+Verify the production build:
 
 ```bash
 npm run typecheck
 npm run build
 ```
 
-## Deploy
-
-Import this repository into Vercel as a Next.js project. Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS domain so canonical and OpenGraph URLs use that domain. Deploy the selected branch, then record the verified URL below.
-
-**Deployment URL:** Pending deployment.
-
-## GitHub submission
-
-**Repository:** [Jkoreaboi/luvbird-mission5](https://github.com/Jkoreaboi/luvbird-mission5) (private project backup). This is not the course fork; a PR to the course repository still needs its fork URL.
-
-**Branch:** `feature/mission5-luvbird`  
-**PR title:** `[성선제]-미션5`  
-**Suggested commit:** `feat: implement Luvbird landing page`
-
-For the course submission, clone the required course fork, create `feature/mission5-luvbird`, and copy these project files into that working tree. Keep the fork's `.git` directory. Then run:
-
-```bash
-git add .
-git status
-git commit -m "feat: implement Luvbird landing page"
-git push -u origin feature/mission5-luvbird
-```
-
-Create a PR titled `[성선제]-미션5` against the course repository's required base branch. The mentor review and Discord reminder are manual submission steps.
+Optional: copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to the deployed HTTPS origin so canonical and OpenGraph URLs point to it.
