@@ -327,12 +327,82 @@ test('only sender can withdraw pending request; cancellation preserves quota and
     assert.equal((await f.as(f.c, 'post', `/requests/${request.body.id}/respond`).send({ accept: true })).status, 404);
     assert.equal(f.db.prepare('SELECT count(*) n FROM requests WHERE sender=?').get(f.a.profile.id).n, 2);
     await f.tick(); assert.deepEqual(pushed, []);
-    for (let i = 0; i < 3; i++) {
-      const r = await f.as(f.a, 'post', '/requests').send({ recipient: f.c.profile.id });
-      assert.equal(r.status, 201); await f.as(f.a, 'delete', `/requests/${r.body.id}`);
-    }
+    const withinLimit = await f.as(f.a, 'post', '/requests').send({ recipient: f.c.profile.id });
+    assert.equal(withinLimit.status, 201);
+    await f.as(f.a, 'delete', `/requests/${withinLimit.body.id}`);
     assert.equal((await f.as(f.a, 'post', '/requests').send({ recipient: f.c.profile.id })).status, 429);
     const accepted = f.db.prepare("SELECT id FROM requests WHERE status='accepted'").get().id;
     assert.equal((await f.as(f.a, 'delete', `/requests/${accepted}`)).status, 404);
   } finally { f.db.close(); }
+});
+
+test("a traveling letter blocks another to the same person until it arrives", async () => {
+  const f = await fixture();
+  const data = payload(f);
+  const first = await f.as(f.a, "post", "/letters").send(data);
+  assert.equal(first.status, 201);
+  assert.equal((await f.as(f.a, "post", "/letters").send(data)).body.id, first.body.id);
+  const stacked = await f.as(f.a, "post", "/letters").send(payload(f));
+  assert.equal(stacked.status, 409);
+  assert.equal(stacked.body.error, "letter_already_traveling");
+  const otherWay = await f.as(f.b, "post", "/letters").send({
+    ...payload(f),
+    recipient: f.a.profile.id,
+    body: "Writing while your letter is still in the air.",
+  });
+  assert.equal(otherWay.status, 201);
+  f.advance(86400000);
+  assert.equal((await f.as(f.a, "post", "/letters").send(payload(f))).status, 201);
+  f.db.close();
+});
+
+test("active connections stop at three", async () => {
+  const f = await fixture();
+  const extra = [];
+  for (const name of ["Hana", "Mio"]) {
+    const r = await f.api.post("/auth/register").send({
+      email: `${name.toLowerCase()}@example.com`,
+      password: "test-only-secret-123",
+      adult: true,
+      profile: profile(name, "tokyo"),
+    });
+    assert.equal(r.status, 201);
+    extra.push(r.body);
+  }
+  for (const person of [f.c, extra[0]]) {
+    const request = await f.as(f.a, "post", "/requests").send({ recipient: person.profile.id });
+    assert.equal(request.status, 201);
+    assert.equal((await f.as(person, "post", `/requests/${request.body.id}/respond`).send({ accept: true })).status, 200);
+  }
+  f.advance(86400000);
+  const request = await f.as(f.a, "post", "/requests").send({ recipient: extra[1].profile.id });
+  assert.equal(request.status, 201);
+  const denied = await f.as(extra[1], "post", `/requests/${request.body.id}/respond`).send({ accept: true });
+  assert.equal(denied.status, 409);
+  assert.equal(denied.body.error, "penpal_limit");
+  f.db.close();
+});
+
+test("purpose search finds a match outside the newest unfiltered page", async () => {
+  const f = await fixture();
+  const insert = f.db.prepare(
+    "INSERT INTO users(id,email,password,profile,created,notify) VALUES(?,?,?,?,?,0)",
+  );
+  const story = (name, purpose) =>
+    JSON.stringify({ ...profile(name, "tokyo"), purpose, interests: ["tea"] });
+  insert.run(randomUUID(), "old-travel@example.com", "x", story("Old Travel", "travel"), 1);
+  insert.run(randomUUID(), "quiet-letters@example.com", "x", JSON.stringify({ ...profile("Quiet", "busan"), interests: ["tea"] }), 2);
+  for (let i = 0; i < 120; i++)
+    insert.run(randomUUID(), `new-${i}@example.com`, "x", story(`New ${i}`, "friendship"), 1000 + i);
+  const travel = await f.as(f.c, "get", "/profiles?purpose=travel");
+  assert.equal(travel.status, 200);
+  assert.deepEqual(travel.body.map((p) => p.nickname), ["Old Travel"]);
+  const letters = await f.as(f.c, "get", "/profiles?purpose=letters");
+  assert.ok(letters.body.some((p) => p.nickname === "Quiet"));
+  assert.ok(letters.body.every((p) => (p.purpose || "letters") === "letters"));
+  const page = await f.as(f.c, "get", "/profiles?purpose=friendship");
+  assert.equal(page.body.length, 100);
+  assert.equal(page.body.some((p) => p.nickname === "Old Travel"), false);
+  assert.equal((await f.as(f.c, "get", "/profiles?purpose=penpal")).status, 400);
+  f.db.close();
 });

@@ -45,6 +45,7 @@ test('expired and wrong-purpose codes fail; resend cooldown and concurrent consu
 test('verification binds codes to the signed-in account and optionally gates social actions', async t => {
   const f = await setup(t, { requireEmailVerification: true });
   assert.equal((await f.as('post', '/requests').send({})).status, 403);
+  assert.equal((await f.as('post', '/letters').send({})).status, 403);
   assert.deepEqual((await f.as('get', '/me/account')).body, { verified: false, emailAvailable: true });
   await f.as('post', '/auth/email/request').send({ lang: 'en' }); await f.tick(); const token = f.mail[0].token;
   assert.equal((await f.api.post('/auth/email/verify').send({ token })).status, 401);

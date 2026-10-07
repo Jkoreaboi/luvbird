@@ -170,6 +170,8 @@ function Main() {
     [adult, setAdult] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [motion] = useState(() => new Animated.Value(0));
+  const discoveryRef = useRef({ country: "", language: "", interest: "", purpose: "" });
+  discoveryRef.current = { country, language, interest, purpose: purposeFilter };
   const sending = useRef(false),
     draftWrite = useRef(Promise.resolve()),
     localDraftWrite = useRef(Promise.resolve());
@@ -202,8 +204,15 @@ function Main() {
   };
   const refresh = useCallback(async () => {
     try {
+    const query = new URLSearchParams();
+    const discovery = discoveryRef.current;
+    if (discovery.country) query.set("country", discovery.country);
+    if (discovery.language) query.set("language", discovery.language);
+    if (discovery.interest) query.set("interest", discovery.interest);
+    if (discovery.purpose) query.set("purpose", discovery.purpose);
+    const profilePath = query.toString() ? `/profiles?${query}` : "/profiles";
     const [p, r, l, d, b, m, h, account] = await Promise.all([
-      api<Profile[]>("/profiles"),
+      api<Profile[]>(profilePath),
       api<Connection[]>("/requests"),
       api<{ serverTime: number; letters: Letter[] }>("/letters"),
       api<Draft[]>("/drafts"),
@@ -235,6 +244,13 @@ function Main() {
       throw e;
     }
   }, []);
+  useEffect(() => {
+    if (!userId) return;
+    const handle = setTimeout(() => {
+      refresh().catch((e: any) => setError(errorText(e.message, lang)));
+    }, 200);
+    return () => clearTimeout(handle);
+  }, [country, language, interest, purposeFilter, userId, refresh, lang]);
   const restoreSession = useCallback(async () => {
     try {
       const health = await api("/health");
@@ -460,6 +476,8 @@ function Main() {
   }
   async function sendLetter() {
     if (!draft || sending.current || uploading || pendingPhoto) return;
+    if (letters.some((l) => l.sender.id === me?.id && l.recipient.id === draft.recipient && now < l.arrives))
+      throw new Error("letter_already_traveling");
     sending.current = true;
     try {
       await localDraftWrite.current.catch(() => {});
@@ -1522,9 +1540,12 @@ function Main() {
             onChange={(stamp) => setDraft({ ...draft, stamp })}
           />
           <Text style={s.caption}>{t("seal")}</Text>
+          {letters.some((l) => l.sender.id === me?.id && l.recipient.id === draft.recipient && now < l.arrives) && (
+            <Text style={s.caption}>{errorText("letter_already_traveling", lang)}</Text>
+          )}
           <Button
             title={t("send")}
-            disabled={busy || uploading || !!pendingPhoto || !draft.body.trim()}
+            disabled={busy || uploading || !!pendingPhoto || !draft.body.trim() || letters.some((l) => l.sender.id === me?.id && l.recipient.id === draft.recipient && now < l.arrives)}
             onPress={() =>
               confirm(
                 t("confirm"),

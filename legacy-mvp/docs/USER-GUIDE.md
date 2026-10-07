@@ -18,11 +18,11 @@
 
 ## 03 · 펜팔과 연결하기
 
-펜팔 탭에서 국가·언어·관심사로 찾아보고 상대의 프로필을 눌러 요청하세요. 상대가 수락하면 편지를 쓸 수 있어요. 요청은 하루 5명, 활성 펜팔은 최대 10명입니다. 처음 연결되면 서로 자기소개 편지를 보내보세요.
+펜팔 탭에서 국가·언어·관심사·교류 목적으로 찾아보고 상대의 프로필을 눌러 요청하세요. 상대가 수락하면 편지를 쓸 수 있어요. 요청은 하루 3명, 함께 편지하는 사람은 최대 3명입니다. 처음 연결되면 서로 자기소개 편지를 보내보세요.
 
 ## 04 · 사진 편지 쓰기
 
-편지는 최대 10,000자, 사진은 최대 3장입니다. 질문 카드를 눌러 첫 문장을 시작해도 좋아요. 사진을 고르고 편지지와 우표를 선택하세요. 보내기 전에 받는 사람과 도착 예정 시간을 확인하세요. 봉인한 뒤에는 글과 사진을 수정할 수 없어요.
+편지는 최대 10,000자, 사진은 최대 3장입니다. 질문 카드를 눌러 첫 문장을 시작해도 좋아요. 사진을 고르고 편지지와 우표를 선택하세요. 보내기 전에 받는 사람과 도착 예정 시간을 확인하세요. 같은 사람에게 보낸 편지가 이동 중이면, 그 편지가 도착하기 전에는 다음 편지를 보낼 수 없어요. 봉인한 뒤에는 글과 사진을 수정할 수 없어요.
 
 ## 05 · 24시간의 기다림
 
@@ -64,11 +64,11 @@ Choose 🍊 friends, 🍒 romance, 🍋 languages, 🍇 pen pals or 🥭 travel.
 
 ## 03 · Connect with a pen pal
 
-Filter by country, language and interests, open a profile and send a request. Letters become available after acceptance. You can send 5 requests a day and have up to 10 active pen pals. Both of you can send an introduction right away.
+Filter by country, language, interests and the purpose of the exchange, open a profile and send a request. Letters become available after acceptance. You can send 3 requests a day and keep up to 3 letter connections. Both of you can send an introduction right away.
 
 ## 04 · Write a photo letter
 
-Write up to 10,000 characters and attach up to 3 photos. Tap a question card for inspiration, then choose paper and a stamp. Check the recipient and arrival estimate before sending. Sealed letters and photos cannot be edited.
+Write up to 10,000 characters and attach up to 3 photos. Tap a question card for inspiration, then choose paper and a stamp. Check the recipient and arrival estimate before sending. While a letter to someone is still traveling, the next letter to that person waits until it arrives. Sealed letters and photos cannot be edited.
 
 ## 05 · A 24-hour journey
 
@@ -110,11 +110,11 @@ No precise address or GPS is needed. Your selected city is public. Delete your a
 
 ## 03 · ペンパルとつながる
 
-国・言語・興味で探し、プロフィールから申請しましょう。承認されると手紙を送れます。申請は1日5人、接続は最大10人です。最初はお互いに自己紹介の手紙を送りましょう。
+国・言語・興味・交流の目的で探し、プロフィールから申請しましょう。承認されると手紙を送れます。申請は1日3人、一緒に手紙を交わす人は最大3人です。最初はお互いに自己紹介の手紙を送りましょう。
 
 ## 04 · 写真付きの手紙
 
-本文は10,000文字まで、写真は3枚までです。質問カードを押して書き始めても大丈夫。便箋と切手を選び、宛先と到着予定を確認しましょう。送信後は文章や写真を変更できません。
+本文は10,000文字まで、写真は3枚までです。質問カードを押して書き始めても大丈夫。便箋と切手を選び、宛先と到着予定を確認しましょう。同じ人への手紙が移動中のあいだは、届くまで次の手紙を送れません。送信後は文章や写真を変更できません。
 
 ## 05 · 24時間の旅
 

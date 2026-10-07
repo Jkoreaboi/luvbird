@@ -20,6 +20,11 @@ import { z } from "zod";
 const derive = promisify(scrypt);
 const hash = (s) => createHash("sha256").update(s).digest("hex");
 const DAY = 86400000;
+const DAILY_REQUESTS = 3;
+const ACTIVE_PALS = 3;
+const DAILY_LETTERS = 3;
+const PROFILE_PAGE = 100;
+const PURPOSES = ["friendship", "romance", "language", "letters", "travel"];
 export const cities = {
   seoul: { name: "Seoul", country: "KR", lat: 37.5665, lon: 126.978 },
   busan: { name: "Busan", country: "KR", lat: 35.1796, lon: 129.0756 },
@@ -386,23 +391,38 @@ export function createApp({
     res.json({ ok: true });
   });
   app.get("/profiles", (req, res) => {
-    const { country = "", language = "", interest = "" } = req.query;
-    const result = all(
-      "SELECT id FROM users WHERE id<>? ORDER BY created DESC LIMIT 500",
+    const country = String(req.query.country || "");
+    const language = String(req.query.language || "");
+    const interest = String(req.query.interest || "").trim().toLowerCase().slice(0, 24);
+    const purpose = String(req.query.purpose || "");
+    if (purpose && !PURPOSES.includes(purpose)) fail(400, "invalid_input");
+    const linked = new Set(
+      all(
+        "SELECT sender, recipient FROM requests WHERE status IN ('pending','accepted') AND (sender=? OR recipient=?)",
+        req.user,
+        req.user,
+      ).flatMap((r) => [r.sender, r.recipient]),
+    );
+    linked.delete(req.user);
+    const matches = [];
+    for (const u of all(
+      "SELECT id FROM users WHERE id<>? ORDER BY created DESC",
       req.user,
-    )
-      .filter((u) => !blocked(req.user, u.id))
-      .map((u) => publicProfile(u.id))
-      .filter(
-        (p) =>
-          (!country || cities[p.city].country === country) &&
-          (!language || p.languages.includes(language)) &&
-          (!interest ||
-            p.interests.some((s) =>
-              s.toLowerCase().includes(String(interest).toLowerCase()),
-            )),
-      );
-    res.json(result.slice(0, 100));
+    )) {
+      if (blocked(req.user, u.id) || linked.has(u.id)) continue;
+      const p = publicProfile(u.id);
+      if (country && cities[p.city]?.country !== country) continue;
+      if (language && !p.languages.includes(language)) continue;
+      if (purpose && (p.purpose || "letters") !== purpose) continue;
+      if (
+        interest &&
+        !p.interests.some((s) => s.toLowerCase().includes(interest))
+      )
+        continue;
+      matches.push(p);
+      if (matches.length === PROFILE_PAGE) break;
+    }
+    res.json(matches);
   });
   app.get("/profiles/:id", (req, res) => {
     if (blocked(req.user, req.params.id)) fail(404, "not_found");
@@ -434,7 +454,7 @@ export function createApp({
           "SELECT count(*) n FROM requests WHERE sender=? AND created>?",
           req.user,
           clock() - DAY,
-        ).n >= 5
+        ).n >= DAILY_REQUESTS
       )
         fail(429, "daily_request_limit");
       if (
@@ -482,7 +502,7 @@ export function createApp({
               "SELECT count(*) n FROM requests WHERE status='accepted' AND (sender=? OR recipient=?)",
               id,
               id,
-            ).n >= 10
+            ).n >= ACTIVE_PALS
           )
             fail(409, "penpal_limit");
       run(
@@ -670,10 +690,19 @@ export function createApp({
         fail(403, "not_connected");
       if (
         get(
+          "SELECT 1 FROM letters WHERE sender=? AND recipient=? AND cancelled=0 AND arrives>?",
+          req.user,
+          p.recipient,
+          clock(),
+        )
+      )
+        fail(409, "letter_already_traveling");
+      if (
+        get(
           "SELECT count(*) n FROM letters WHERE sender=? AND sent>?",
           req.user,
           clock() - DAY,
-        ).n >= 20
+        ).n >= DAILY_LETTERS
       )
         fail(429, "daily_letter_limit");
       if (new Set(p.photos).size !== p.photos.length)

@@ -320,17 +320,25 @@ export function errorText(code: string, lang: Lang) {
       "아직 도착하지 않은 편지예요.",
       "This letter is still on its way.",
     ],
+    letter_already_traveling: [
+      "이 사람에게 보낸 편지가 아직 이동 중이에요. 도착한 뒤에 다음 편지를 쓸 수 있어요.",
+      "A letter to this person is still traveling. You can write the next one after it arrives.",
+    ],
     request_exists: [
       "이미 요청했거나 연결된 펜팔이에요.",
       "A request or connection already exists.",
     ],
     daily_request_limit: [
-      "오늘은 5명에게 인사를 보냈어요. 내일 다시 만나요.",
-      "You have sent 5 requests today. Come back tomorrow.",
+      "오늘은 3명에게 인사를 보냈어요. 내일 다시 만나요.",
+      "You have sent 3 requests today. Come back tomorrow.",
     ],
     penpal_limit: [
-      "활성 펜팔은 최대 10명이에요.",
-      "Up to 10 active pen pals are supported.",
+      "함께 편지하는 사람은 최대 3명이에요.",
+      "You can keep up to 3 letter connections.",
+    ],
+    daily_letter_limit: [
+      "오늘은 편지를 3통 보냈어요. 내일 다시 쓸 수 있어요.",
+      "You have sent 3 letters today. You can write again tomorrow.",
     ],
     unauthorized: ["다시 로그인해주세요.", "Please sign in again."],
     not_found: [
@@ -352,9 +360,11 @@ const japaneseErrors: Record<string, string> = {
   account_unavailable:
     "このメールアドレスでは登録できません。ログインをお試しください。",
   letter_in_flight: "手紙はまだ配達中です。",
+  letter_already_traveling: "この人への手紙はまだ移動中です。届いてから次の手紙を書けます。",
   request_exists: "すでに申請済み、または接続済みです。",
-  daily_request_limit: "本日の申請上限は5件です。明日またお試しください。",
-  penpal_limit: "ペンパルは最大10人です。",
+  daily_request_limit: "本日の申請上限は3件です。明日またお試しください。",
+  penpal_limit: "一緒に手紙を交わす人は最大3人です。",
+  daily_letter_limit: "本日の手紙は3通までです。明日また書けます。",
   unauthorized: "再度ログインしてください。",
   not_found: "この項目は利用できなくなりました。",
   not_connected: "先にペンパルとして接続してください。",
