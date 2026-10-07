@@ -21,7 +21,10 @@
 
 Luvbird is the company. DearBird is its first product: a global letter, not a messenger. People find someone by country, language, interests, and why they want to write, then send a photo and a piece of their day. The letter travels for 24 hours, and the other person replies when they are ready.
 
-This repository contains the **DearBird marketing landing page**. It explains the product, shows real screens from the DearBird app, and separates what the product does today from its future physical-mail vision. It does not contain the app's source code, and it does not create accounts or send letters.
+This repository contains two things:
+
+- The **DearBird marketing landing page** at the repo root (`app/`, `components/`). It explains the product and does not create accounts or send letters.
+- The earlier functional MVP in [`legacy-mvp/`](legacy-mvp/): an Expo app and an Express API for accounts, matching, letters, and reports. Scope and limits are in [`CURSOR_HANDOFF.md`](CURSOR_HANDOFF.md) and [`FEATURES_IMPLEMENTED.md`](FEATURES_IMPLEMENTED.md).
 
 - **Live product site:** [https://www.luvbird.app/](https://www.luvbird.app/)
 - **This repository:** the DearBird landing page (Next.js, static build)

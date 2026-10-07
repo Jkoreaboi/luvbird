@@ -1,0 +1,93 @@
+const { chromium } = require('../server/node_modules/playwright-core');
+const binary = require(require.resolve('@sparticuz/chromium', { paths: [require('path').resolve('server')] })).default;
+const express = require('../server/node_modules/express');
+const fs = require('fs'), path = require('path'), assert = require('assert/strict');
+(async () => {
+  const { createApp } = await import('../server/app.mjs');
+  const ctx = createApp({ filename: ':memory:', mode: 'test' });
+  const app = express(); app.use(express.static(path.resolve('mobile/dist'))); app.get('/app/{*path}', (_,res)=>res.sendFile(path.resolve('mobile/dist/index.html'))); app.use(ctx.app);
+  const server = await new Promise(resolve => { const s = app.listen(4000, '127.0.0.1', () => resolve(s)); });
+  let browser, page;
+  const register = async (email, nickname) => (await fetch('http://localhost:4000/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email,password:'journey-test-password',adult:true,profile:{nickname,city:'seoul',bio:'A little story.',lookingFor:'',interests:['books'],languages:['ko'],avatar:'dove'}}) })).json();
+  async function capture(name) {
+    const dir=path.resolve('server/node_modules/@fontsource/noto-sans-kr');
+    const css=fs.readFileSync(path.join(dir,'400.css'),'utf8').replace(/url\(([^)]+)\)/g,(_,f)=>'url(data:font/woff2;base64,'+fs.readFileSync(path.join(dir,f.replace(/["']/g,''))).toString('base64')+')');
+    await page.addStyleTag({content:css+'\n*{font-family:"Noto Sans KR",sans-serif!important}'});await page.evaluate(()=>document.fonts.ready);
+    await page.screenshot({path:'docs/screenshots/'+name+'.png'});
+  }
+  try {
+    const user = await register('journey@example.com','Sunje');
+    browser = await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH || await binary.executablePath(),args:binary.args});
+    page = await browser.newPage({viewport:{width:390,height:844}}); page.setDefaultTimeout(12000); const errors=[];
+    page.on('pageerror',e=>errors.push(e.message)); page.on('dialog',d=>d.accept());
+    await page.addInitScript(() => localStorage.setItem('dearbird-onboarding-v1','done'));
+    await page.goto('http://localhost:4000');
+    await page.getByRole('textbox',{name:'이메일',exact:true}).fill('journey@example.com');
+    await page.getByRole('textbox',{name:'비밀번호 (12자 이상)',exact:true}).fill('journey-test-password');
+    await page.getByRole('button',{name:'로그인',exact:true}).click();
+    await page.getByRole('tab',{name:'♧ 펜팔',selected:true}).waitFor();
+    await page.getByRole('tab',{name:'♧ 펜팔'}).click();
+    await page.getByText('아직 만날 펜팔이 없어요',{exact:true}).waitFor();
+    await page.getByText('기다리는 동안, 나를 소개해요',{exact:true}).waitFor();
+    await capture('17-empty-profile');
+    await page.getByRole('button',{name:/어떤 편지 친구를 찾는지 적기/}).click();
+    await page.getByRole('textbox',{name:'만나고 싶은 펜팔',exact:true}).waitFor();
+    await page.getByRole('dialog').getByText('닫기',{exact:true}).click();
+    await page.getByRole('button',{name:/조건으로 찾기/}).click();
+    await page.getByRole('textbox',{name:'관심사 검색',exact:true}).fill('nothing');
+    await page.getByRole('button',{name:'검색 조건 지우기',exact:true}).click();
+    assert.equal(await page.getByRole('textbox',{name:'관심사 검색',exact:true}).inputValue(),'');
+    // A temporary network outage must not destroy the stored login.
+    const saved = await page.evaluate(()=>sessionStorage.getItem('luvbird-session'));
+    await page.route('**/health',route=>route.abort('failed')); await page.reload();
+    await page.getByText('연결이 잠시 끊겼어요',{exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>sessionStorage.getItem('luvbird-session')),saved);
+    await page.unroute('**/health'); await page.getByRole('button',{name:'다시 연결하기',exact:true}).click();
+    await page.getByRole('tab',{name:'♧ 펜팔'}).waitFor();
+    const other = await register('other-journey@example.com','Emma');
+    await page.reload();
+    await page.getByText('공통 관심사 · books',{exact:true}).waitFor();
+    await page.getByText('함께 쓰는 언어 · KO',{exact:true}).waitFor();
+    await capture('18-common-ground');
+    const post = async (token,url,body) => fetch('http://localhost:4000'+url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(body)});
+    await post(user.token,'/requests',{recipient:other.profile.id}); await page.reload();
+    await page.getByRole('tab',{name:'◎ 월드맵'}).click();
+    await page.getByText('인사를 보냈어요',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'펜팔 요청 확인',exact:true}).click();
+    await page.getByRole('button',{name:'요청 취소',exact:true}).click();
+    await page.getByRole('button',{name:'요청 취소',exact:true}).waitFor({state:'hidden'});
+    assert.equal(ctx.db.prepare("SELECT count(*) n FROM requests WHERE status='cancelled'").get().n,1);
+    const sent=await (await post(user.token,'/requests',{recipient:other.profile.id})).json();
+    await post(other.token,`/requests/${sent.id}/respond`,{accept:true}); await page.reload();
+    await page.getByRole('tab',{name:'◎ 월드맵'}).click();
+    await page.getByText('첫 편지를 보내볼까요?',{exact:true}).waitFor();
+    const fontDir=path.resolve('server/node_modules/@fontsource/noto-sans-kr');
+    const css=fs.readFileSync(path.join(fontDir,'400.css'),'utf8').replace(/url\(([^)]+)\)/g,(_,f)=>`url(data:font/woff2;base64,${fs.readFileSync(path.join(fontDir,f.replace(/["']/g,''))).toString('base64')})`);
+    await page.addStyleTag({content:css+'\n* {font-family:"Noto Sans KR",sans-serif !important;}'});await page.evaluate(()=>document.fonts.ready);
+    await page.screenshot({path:'docs/screenshots/10-first-letter-guide.png'});
+    await page.getByRole('button',{name:'편지 쓰기',exact:true}).click();
+    const writer = page.getByRole('textbox',{name:'편지 쓰기',exact:true});
+    await writer.fill('내가 먼저 적은 하루의 이야기.');
+    await page.getByRole('button',{name:'첫 문장이 어려워요 +',exact:true}).click();
+    const question = page.getByRole('button',{name:'오늘 가장 기억에 남는 순간은?',exact:true});
+    await question.click();
+    assert.equal(await writer.inputValue(),'내가 먼저 적은 하루의 이야기.\n\n오늘 가장 기억에 남는 순간은?');
+    assert.equal(await question.isDisabled(),true);
+    await page.getByText('초안 저장됨',{exact:true}).waitFor();
+    await page.reload();
+    await page.getByRole('tab',{name:'◎ 월드맵'}).click();
+    await page.getByRole('button',{name:'편지 쓰기',exact:true}).click();
+    assert.equal(await writer.inputValue(),'내가 먼저 적은 하루의 이야기.\n\n오늘 가장 기억에 남는 순간은?');
+    await page.addStyleTag({content:css+'\n* {font-family:"Noto Sans KR",sans-serif !important;}'});await page.evaluate(()=>document.fonts.ready);
+    await page.screenshot({path:'docs/screenshots/15-question-draft.png'});
+
+    await page.getByRole('dialog').getByText('닫기',{exact:true}).click();
+    ctx.db.prepare('DELETE FROM sessions WHERE user=?').run(user.profile.id);
+    await page.reload(); await page.getByRole('button',{name:'로그인',exact:true}).waitFor();
+    assert.equal(await page.evaluate(()=>sessionStorage.getItem('luvbird-session')),null);
+    assert.deepEqual(errors,[]);
+    fs.writeFileSync('docs/journey-ui-verification.json',JSON.stringify({passed:true,physicalDevice:false,checks:['question appends without overwriting','duplicate question disabled','question draft restored after reload','common languages and interests visible','empty state profile editing','empty community','clear filters','network outage preserves session','reconnect','outgoing request status','withdraw request','accepted first-letter guidance','open composer','expired session returns to login'],consoleErrors:errors},null,2));
+    console.log('JOURNEY_UI_PASS');
+  } catch(e) { if(page) console.log(await page.locator('body').innerText()); throw e; }
+  finally { if(browser) await browser.close(); await new Promise(resolve=>server.close(resolve));ctx.db.close(); }
+})().catch(e=>{console.error(e);process.exitCode=1;});

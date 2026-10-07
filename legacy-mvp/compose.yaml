@@ -1,0 +1,38 @@
+services:
+  api:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      TRUST_PROXY_HOPS: 1
+      DELIVERY_SECONDS: 86400
+      DATABASE_PATH: /data/luvbird.sqlite
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      OPERATIONS_TOKEN: ${OPERATIONS_TOKEN:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      REQUIRE_EMAIL_VERIFICATION: ${REQUIRE_EMAIL_VERIFICATION:-true}
+      PUSH_ENABLED: ${PUSH_ENABLED:-false}
+      EXPO_ACCESS_TOKEN: ${EXPO_ACCESS_TOKEN:-}
+    volumes:
+      - letters:/data
+    expose:
+      - "4000"
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      API_DOMAIN: ${API_DOMAIN:?Set API_DOMAIN to your API domain}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  letters:
+  caddy_data:
+  caddy_config:

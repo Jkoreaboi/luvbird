@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "physicalDevice": false,
+  "checks": [
+    "tutorial before login even offline",
+    "four steps and back",
+    "three languages",
+    "completion persisted",
+    "default people tab",
+    "profile visible without scrolling",
+    "send request",
+    "replay from profile",
+    "skip persisted",
+    "replay from login"
+  ],
+  "consoleErrors": []
+}

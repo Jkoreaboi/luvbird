@@ -1,0 +1,38 @@
+# Review the paid compute + persistent-disk cost before creating this service.
+# Current blueprint fields: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: luvbird-api
+    runtime: node
+    plan: 0.5c-512mb
+    region: singapore
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: node index.mjs
+    healthCheckPath: /ready
+    autoDeployTrigger: 'off'
+    disk:
+      name: luvbird-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: NODE_ENV
+        value: production
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /var/data/luvbird.sqlite
+      - key: DELIVERY_SECONDS
+        value: '86400'
+      - key: TRUST_PROXY_HOPS
+        value: '1'
+      - key: REQUIRE_EMAIL_VERIFICATION
+        value: 'true'
+      - key: PUSH_ENABLED
+        value: 'false'
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

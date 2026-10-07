@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.local
+.env.*
+!.env*.example
+.expo/
+dist/
+dist-native/
+deliverables/
+data/
+*.sqlite*
+*.apk
+*.ipa
+credentials.json
+*.keystore
+*.p8
+*.p12

@@ -55,9 +55,15 @@ Avoid AI SaaS style, strong gradients, glassmorphism, dashboard layout, generic 
 
 Before adding or keeping any UI, line of copy, or feature, ask: does this deliver DearBird's core feeling, the thrill of waiting for someone's letter? If it does not, remove it or simplify it.
 
+## Repository layout
+
+The Next.js landing page stays at the repo root. The earlier working product is in `legacy-mvp/` (`mobile/` Expo app, `server/` Express API). Treat that MVP as the functional baseline. Do not delete the landing page, and do not move either tree into a monorepo until imports, scripts, env files, tests, and deploy assumptions are checked. Physical mail is still a future chapter.
+
 ## Stack
 
-Next.js App Router, TypeScript, Tailwind CSS, and a shadcn/ui-style Button primitive.
+Landing: Next.js App Router, TypeScript, Tailwind CSS, and a shadcn/ui-style Button primitive.
+
+MVP: Expo SDK 57, React Native 0.86, Express 5, SQLite.
 
 ## Development rules
 

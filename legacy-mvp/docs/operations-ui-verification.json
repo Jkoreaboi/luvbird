@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": [
+    "wrong key rejected",
+    "report text rendered without HTML",
+    "review status and mandatory note",
+    "suspend account",
+    "audit history",
+    "logout clears reports"
+  ],
+  "realUsers": false
+}

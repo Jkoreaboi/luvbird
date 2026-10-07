@@ -1,0 +1,18 @@
+I am adding a folder called `legacy-mvp` to the existing `Jkoreaboi/luvbird` project.
+
+Important: the existing GitHub repo currently contains a Next.js marketing landing page, but DearBird previously had a functional mobile/API MVP. The old source is now in `legacy-mvp/` and `CURSOR_HANDOFF.md` documents its verified scope.
+
+Read `CURSOR_HANDOFF.md`, `FEATURES_IMPLEMENTED.md`, `legacy-mvp/README.md`, `legacy-mvp/docs/RESUME.md`, and the actual source before making changes.
+
+Do not assume the landing page is the whole product. Do not rewrite features from scratch before checking whether they already exist in the old MVP.
+
+First, only analyze and report:
+1. the architecture of the current Next.js landing page;
+2. the architecture of the older Expo mobile app and Express API;
+3. the features that are already implemented versus only planned;
+4. what can be reused safely;
+5. a staged integration plan that keeps the landing page working while bringing the mobile app and API into the same repository.
+
+Prefer a clean structure such as `apps/web`, `apps/mobile`, and `apps/api` if justified, but do not perform a destructive migration until you have checked package scripts, imports, environment variables, tests, and deployment assumptions.
+
+Product rule: DearBird is a slow global pen-pal product built around the anticipation of waiting for a letter. Waiting is a feature. Do not turn it into ordinary instant chat.

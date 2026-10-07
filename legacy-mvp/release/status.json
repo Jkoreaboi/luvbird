@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-27",
+  "automatedTests": 26,
+  "typecheck": "passed",
+  "lint": "passed",
+  "browserJourney": "passed",
+  "browserLetterFlow": "passed",
+  "backupRestore": "passed",
+  "productionProcessSmoke": "passed_with_mock_mail_credentials_no_send",
+  "renderBlueprint": "prepared_not_deployed",
+  "dockerImage": "not_built_runtime_unavailable",
+  "liveApiUrl": null,
+  "realEmailDelivery": "not_verified",
+  "apk": null,
+  "testflight": null,
+  "requiredConnections": [
+    "hosting account",
+    "email provider and verified domain",
+    "source repository",
+    "Expo project and login",
+    "Apple signing and App Store Connect",
+    "operating contact and final policies"
+  ],
+  "nativeJavaScriptExport": "previous_revision_passed_current_changes_not_reexported",
+  "releaseOriginGuard": "passed_build_and_preflight",
+  "browserRegressionRechecked": "2026-09-27 Asia/Seoul",
+  "browserOnboarding": "passed",
+  "browserAccountRecovery": "passed_mock_email_only",
+  "fourStepUpdate": {
+    "questionDraft": "passed",
+    "sharedProfileContext": "passed",
+    "emptyStateProfileEditing": "passed",
+    "operatorDashboard": "passed_test_data_only"
+  },
+  "warmUI": "typecheck_lint_web_export_journey_letter_flow_onboarding_passed"
+}

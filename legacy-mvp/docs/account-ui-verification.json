@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "viewport": "390x844",
+  "physicalDevice": false,
+  "realEmailDelivery": false,
+  "checks": [
+    "request reset",
+    "paste code",
+    "set password",
+    "login with new password",
+    "request verification",
+    "verify email"
+  ],
+  "consoleErrors": []
+}

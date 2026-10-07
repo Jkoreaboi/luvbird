@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "viewport": "390×844 browser rendering of React Native app",
+  "physicalDevice": false,
+  "checks": [
+    "Japanese/English/Korean switch and restart persistence",
+    "lost upload response and reload recovery without duplicate",
+    "UI registration",
+    "UI login",
+    "request and acceptance",
+    "image picker and authenticated photo upload",
+    "draft recovery",
+    "seal and send",
+    "world map",
+    "arrival with controlled server clock",
+    "open letter",
+    "reply"
+  ],
+  "consoleErrors": []
+}

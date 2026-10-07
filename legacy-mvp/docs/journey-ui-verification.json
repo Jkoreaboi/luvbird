@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "physicalDevice": false,
+  "checks": [
+    "question appends without overwriting",
+    "duplicate question disabled",
+    "question draft restored after reload",
+    "common languages and interests visible",
+    "empty state profile editing",
+    "empty community",
+    "clear filters",
+    "network outage preserves session",
+    "reconnect",
+    "outgoing request status",
+    "withdraw request",
+    "accepted first-letter guidance",
+    "open composer",
+    "expired session returns to login"
+  ],
+  "consoleErrors": []
+}
