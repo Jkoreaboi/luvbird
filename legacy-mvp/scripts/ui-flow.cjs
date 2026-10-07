@@ -21,7 +21,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict');
  try{
  await load(a);await screenshot(a,'01-onboarding');
  await a.getByRole('button',{name:'DearBird 사용 가이드',exact:true}).click();await a.getByText('05 · 24시간의 기다림',{exact:true}).scrollIntoViewIfNeeded();await screenshot(a,'08-guide');await a.getByText('닫기',{exact:true}).click();
- await a.getByRole('button',{name:'luvbird 소개',exact:true}).click();await a.getByText('우리가 만드는 것',{exact:true}).waitFor();await a.getByText('닫기',{exact:true}).click();
+ await a.getByRole('button',{name:'Luvbird 소개',exact:true}).click();await a.getByText('우리가 만드는 것',{exact:true}).waitFor();await a.getByText('닫기',{exact:true}).click();
  await a.getByRole('button',{name:'App language',exact:true}).click();await a.getByRole('button',{name:'日本語',exact:true}).click();
  await a.getByRole('button',{name:'ログイン',exact:true}).waitFor();await a.reload();await fonts(a);await a.getByRole('button',{name:'ログイン',exact:true}).waitFor();await screenshot(a,'07-japanese');await a.getByRole('button',{name:'DearBird 使い方ガイド',exact:true}).click();await a.getByText('01 · あなたの小さな世界',{exact:true}).waitFor();await a.getByText('閉じる',{exact:true}).click();
  await a.getByRole('button',{name:'App language',exact:true}).click();await a.getByRole('button',{name:'English',exact:true}).click();await a.getByRole('button',{name:'Log in',exact:true}).waitFor();

@@ -1,54 +1,54 @@
-# luvbird 소개
+# Luvbird 소개
 
 누군가의 하루가, 당신에게 도착하는 시간.
 
 ## 우리가 만드는 것
 
-luvbird는 사진과 편지로 서로의 일상을 나누는 앱 DearBird를 만들고 있습니다. 멀리 있는 사람의 작은 이야기를 기다리고, 읽고, 내 이야기로 답하는 경험을 지향합니다.
+Luvbird는 회사입니다. 첫 제품 DearBird는 메신저가 아닙니다. 멀리 있는 한 사람에게 하루를 사진과 편지로 보내고, 그 편지가 24시간 동안 이동하게 합니다.
 
 ## 우리의 약속
 
-사람과 이야기를 중심에 둡니다. 24시간의 기다림, 도시만 공유하는 프로필, 읽음 표시 없는 편지로 각자의 속도를 존중합니다. 친구, 언어 교환, 여행, 새로운 인연을 폭넓게 담습니다.
+사람과 이야기를 중심에 둡니다. 좋아요, 팔로워, 읽음 표시는 없습니다. 프로필은 도시만 보여 주고, 답장은 상대의 속도로 다시 24시간을 이동합니다.
 
 ## 현재의 DearBird
 
-현재는 테스트 버전입니다. 실제 운영 주체 정보와 문의 연락처는 공개 출시 전에 확정해 안내할 예정입니다. 이 소개는 법인 등록, 인증 또는 안전성을 보증하는 문서가 아닙니다.
+현재는 테스트 버전입니다. 실물 우편은 아직 없는 다음 이야기입니다. 운영 주체와 문의 연락처는 공개 전에 확정합니다. 이 소개는 법인 등록이나 안전 보증이 아닙니다.
 
 ---
 
-# About luvbird
+# About Luvbird
 
 A little piece of someone’s day, on its way to you.
 
 ## What we are building
 
-luvbird is creating DearBird, a photo pen pal app for sharing everyday stories. We want to make space to wait for someone’s words, read them, and send a piece of your own day back.
+Luvbird is the company. DearBird is its first product, and it is not a messenger. You send one person a photo and a letter about your day. The letter travels for 24 hours.
 
 ## What matters to us
 
-People and their stories come first. A 24-hour journey, city-level profiles and no read receipts leave room for your own pace. Friendship, language exchange, travel and new connections all belong here.
+People and their stories come first. There are no likes, no followers, and no read receipts. A profile shows a city, and a reply travels for another 24 hours.
 
 ## DearBird today
 
-This is a test version. Operating entity details and support contacts will be confirmed before public release. This introduction is not proof of company registration, certification or guaranteed safety.
+This is a test version. Physical mail is a later chapter, not something you can use now. Support contacts will be confirmed before public release. This page is not proof of registration or guaranteed safety.
 
 ---
 
-# luvbirdについて
+# Luvbirdについて
 
 誰かの一日が、あなたに届く時間。
 
 ## 私たちがつくるもの
 
-luvbirdは、写真と手紙で日常を分かち合う文通アプリDearBirdを開発しています。遠くにいる誰かの言葉を待ち、読み、自分の物語で返す体験を目指しています。
+Luvbirdは会社です。最初の製品DearBirdはメッセンジャーではありません。遠くの一人に、その日の写真と手紙を送り、手紙は24時間かけて届きます。
 
 ## 大切にしていること
 
-人と物語を中心に。24時間の旅、街だけを共有するプロフィール、既読表示のない手紙で、それぞれのペースを尊重します。友達、言語交換、旅行、新しいつながりを歓迎します。
+人と物語を中心にします。いいね、フォロワー、既読表示はありません。プロフィールは街だけを示し、返信もまた24時間かけて届きます。
 
 ## 現在のDearBird
 
-現在はテスト版です。運営主体の詳細と問い合わせ先は公開前に確定してお知らせします。この紹介は法人登録、認証、安全性を保証するものではありません。
+現在はテスト版です。紙の郵便は、まだ使えない次の章です。運営主体と問い合わせ先は公開前に確定します。この紹介は法人登録や安全性の保証ではありません。
 
 ---
 

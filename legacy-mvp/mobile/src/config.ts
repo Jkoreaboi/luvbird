@@ -1,5 +1,5 @@
 export const brand = {
-  company: "luvbird",
+  company: "Luvbird",
   app: "DearBird",
   tagline: "A little closer, one letter at a time.",
 };

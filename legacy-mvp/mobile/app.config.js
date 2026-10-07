@@ -58,7 +58,7 @@ module.exports = {
       ["expo-notifications", { color: "#24464A" }],
     ],
     extra: {
-      company: "luvbird",
+      company: "Luvbird",
       variant,
       ...(process.env.EXPO_PROJECT_ID
         ? { eas: { projectId: process.env.EXPO_PROJECT_ID } }

@@ -822,7 +822,7 @@ export function createApp({
               },
               body: JSON.stringify({
                 to: d.token,
-                title: "DearBird · luvbird",
+                title: "DearBird by Luvbird",
                 body:
                   e.kind === "arrived"
                     ? "Your letter has arrived."

@@ -36,16 +36,18 @@ if [[ ! -d server/node_modules ]]; then (cd server && npm ci); fi
 if [[ ! -d mobile/node_modules ]]; then (cd mobile && npm ci); fi
 
 if [[ "${DEARBIRD_FAST:-0}" == "1" ]]; then
-  echo '빠른 테스트: 별도 DB에서 편지가 60초 후 도착합니다.'
+  echo '빠른 테스트: 별도 스테이징 DB에서 편지가 60초 후 도착합니다. 이 모드는 제품 기본값이 아닙니다.'
+  APP_ENV=staging
   DELIVERY_SECONDS=60
   DATABASE_PATH="$ROOT_DIR/server/data/luvbird-phone-fast.sqlite"
 else
   echo '기본 테스트: 편지가 발송 24시간 후 도착합니다.'
+  APP_ENV=development
   DELIVERY_SECONDS=86400
   DATABASE_PATH="$ROOT_DIR/server/data/luvbird-phone.sqlite"
 fi
 
-export APP_ENV=development DELIVERY_SECONDS DATABASE_PATH PORT=4000 PUSH_ENABLED=false
+export APP_ENV DELIVERY_SECONDS DATABASE_PATH PORT=4000 PUSH_ENABLED=false
 export DEV_WEB_ORIGINS="http://localhost:8081,http://127.0.0.1:8081,http://$LAN_IP:8081"
 export EXPO_PUBLIC_API_URL="http://$LAN_IP:4000" APP_VARIANT=development
 

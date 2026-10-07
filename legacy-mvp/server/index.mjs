@@ -8,12 +8,15 @@ const { app, tick, db } = createApp({
   requireEmailVerification: process.env.APP_ENV === "production" || process.env.REQUIRE_EMAIL_VERIFICATION === "true",
   filename: process.env.DATABASE_PATH || "data/luvbird.sqlite",
   mode: process.env.APP_ENV || "development",
-  deliverySeconds: Number(process.env.DELIVERY_SECONDS || 86400),
+  // Only an explicit staging or test process may shorten the wait. Development and production stay at 24 hours.
+  deliverySeconds: ["staging", "test"].includes(process.env.APP_ENV || "")
+    ? Number(process.env.DELIVERY_SECONDS || 86400)
+    : 86400,
   pushEnabled: process.env.PUSH_ENABLED === "true",
 });
 const port = Number(process.env.PORT || 4000);
 const server = app.listen(port, "0.0.0.0", () =>
-  console.log(`luvbird API listening on ${port}`),
+  console.log(`DearBird API listening on ${port}`),
 );
 let running = false;
 const worker = setInterval(async () => {

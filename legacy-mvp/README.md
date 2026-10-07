@@ -1,9 +1,9 @@
-# DearBird by luvbird
+# DearBird by Luvbird
 
-세계의 누군가에게 사진과 편지를 보내고, 비둘기가 이동하는 지도를 보며 24시간을 기다리는 모바일 펜팔 MVP.
+멀리 있는 한 사람에게 하루를 사진과 편지로 보내고, 그 편지가 약 24시간 이동하는 동안 기다리는 모바일 앱입니다. Luvbird는 회사이고, DearBird는 그 첫 제품입니다. 메신저가 아닙니다.
 
-- 회사명: **luvbird**
-- 앱 이름: **DearBird** (변경 가능)
+- 회사: **Luvbird**
+- 제품: **DearBird**
 - 모바일: Expo SDK 57 / React Native 0.86 / React 19 / TypeScript / Expo Router
 - 서버: Node 24 / Express 5 / SQLite / Sharp
 - 언어: 한국어·영어·일본어

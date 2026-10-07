@@ -1,4 +1,4 @@
-# luvbird / DearBird — 운영과 테스트 배포
+# Luvbird / DearBird — 운영과 테스트 배포
 
 ## 현재 상태와 경계
 
