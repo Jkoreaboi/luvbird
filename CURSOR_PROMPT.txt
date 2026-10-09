@@ -1,18 +1,15 @@
-I am adding a folder called `legacy-mvp` to the existing `Jkoreaboi/luvbird` project.
+Open the existing `Jkoreaboi/luvbird` project. The Next.js landing page stays at the repository root, and the DearBird app and API stay in `legacy-mvp/`.
 
-Important: the existing GitHub repo currently contains a Next.js marketing landing page, but DearBird previously had a functional mobile/API MVP. The old source is now in `legacy-mvp/` and `CURSOR_HANDOFF.md` documents its verified scope.
+Read `CURSOR_START_HERE.md` before making changes. The marketing site, the product baseline, and the decision not to move the trees into `apps/` are already recorded there. A separate Webild visual concept is reference only; its code is not in this repository.
 
-Read `CURSOR_HANDOFF.md`, `FEATURES_IMPLEMENTED.md`, `legacy-mvp/README.md`, `legacy-mvp/docs/RESUME.md`, and the actual source before making changes.
+Do not assume the landing page is the whole product. Do not rewrite features from scratch before checking whether they already exist in `legacy-mvp/`. Do not delete the landing page, and do not perform a monorepo migration until package scripts, imports, environment variables, tests, and deployment assumptions are checked again.
 
-Do not assume the landing page is the whole product. Do not rewrite features from scratch before checking whether they already exist in the old MVP.
+Product rules that already exist in the API:
 
-First, only analyze and report:
-1. the architecture of the current Next.js landing page;
-2. the architecture of the older Expo mobile app and Express API;
-3. the features that are already implemented versus only planned;
-4. what can be reused safely;
-5. a staged integration plan that keeps the landing page working while bringing the mobile app and API into the same repository.
+- A letter travels for 24 hours. Production refuses any other duration.
+- One traveling letter per sender and recipient. A retry of the same send is allowed. The other person can still send their own letter.
+- Discovery filters country, language, interest, and purpose on the server before returning at most 100 people.
+- Three requests a day, three active letter connections, three letters a day.
+- No read receipts, likes, followers, or precise location.
 
-Prefer a clean structure such as `apps/web`, `apps/mobile`, and `apps/api` if justified, but do not perform a destructive migration until you have checked package scripts, imports, environment variables, tests, and deployment assumptions.
-
-Product rule: DearBird is a slow global pen-pal product built around the anticipation of waiting for a letter. Waiting is a feature. Do not turn it into ordinary instant chat.
+Do not present physical mail, store release, payments, ads, or AI matching as shipped. Do not add fake accounts.

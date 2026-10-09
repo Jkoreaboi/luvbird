@@ -8,7 +8,7 @@
 - Korean / English / Japanese UI
 - Email verification UI/API with mock/local verification during tests
 - Password recovery/reset UI/API
-- Country / language / interest discovery
+- Country / language / interest / purpose discovery, with purpose applied on the server before the 100-person page
 - Shared-context display (language, interests, exchange purpose)
 - Pen-pal request / accept / reject / cancel
 - Empty-state profile improvement guidance
@@ -19,6 +19,8 @@
 - Draft autosave / restore
 - Send confirmation
 - Server-enforced 24-hour journey in production logic
+- One in-flight letter per sender and recipient; the next letter waits until arrival
+- Three requests a day, three active connections, three letters a day
 - In-flight, arrived, sent, draft states
 - World map and route visualization
 - Time-based pigeon/letter position
@@ -31,7 +33,7 @@
 
 ## Recorded final verification state
 
-- Server automated tests: 26 passed
+- Server automated tests: 26 passed in the 2026-09-27 record. Re-run on Node.js 24 on 2026-10-07: 30 passed, including the in-flight letter lock, the three-person cap, and purpose search
 - TypeScript: passed
 - Lint: passed
 - Browser journey: passed

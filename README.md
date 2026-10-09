@@ -129,12 +129,12 @@ flowchart TD
 ## Collaboration
 
 - The landing page was implemented through AI-assisted development. [`CLAUDE.md`](CLAUDE.md) is the working brief that defines the service, audience, design principles, and non-negotiable rules (for example, "Do not imply account signup, letter delivery, or physical mail works from this landing page").
-- The product screens in `public/screens/` come from the existing DearBird app. This repository does not include the app's source code.
+- The product screens in `public/screens/` come from the earlier DearBird app. Its source is preserved in `legacy-mvp/mobile/`.
 
 ## Current Status
 
 - Quality check passed. `npm run typecheck` and `npm run build` pass, and every route is prerendered as static content. The page has one `h1`, no horizontal overflow on desktop or a 390px screen, and the letter moves in order: Find, Write, Wait, Reply.
-- The CTA is a launch placeholder. There is no signup, waitlist, or backend in this repository.
+- The CTA is a launch placeholder. The landing page has no signup or waitlist. Accounts and letters live in `legacy-mvp/` and are not connected to this page.
 - Footer Privacy, Terms, and Contact entries are placeholders.
 - Physical mail is a future vision, not a shipped feature.
 - [luvbird.app](https://www.luvbird.app/) is Luvbird's live product site. This landing page is a separate codebase and is not the site served at that domain.
